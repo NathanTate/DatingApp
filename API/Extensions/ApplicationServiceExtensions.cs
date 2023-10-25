@@ -21,7 +21,10 @@ public static class ApplicationServiceExtensions
 
         //Registering TokenService for JWT 
         services.AddScoped<ITokenService, TokenService>();
-
+        //Adding UserRepository, so we don't have to use DbContext all over out app (watch lesson 92 for pros and cons)
+        services.AddScoped<IUserRepository, UserRepository>();
+        //Adding Automapper from nuget for mapping our entity to dto
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         return services;
     }
 }

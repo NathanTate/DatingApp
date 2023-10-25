@@ -1,5 +1,8 @@
 ﻿using API.Data;
+using API.DTOs;
 using API.Entities;
+using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,44 +12,27 @@ namespace API.Controllers;
 [Authorize]
 public class UsersController : BaseApiController
 {
-    private readonly DataContext _context;
+    private readonly IUserRepository _userRepository;
+    private readonly IMapper _mapper;
 
-    public UsersController(DataContext context)
+    public UsersController(IUserRepository userRepository, IMapper mapper)
     {
-        _context = context;
+        _userRepository = userRepository;
+        _mapper = mapper;
     }
 
-    [AllowAnonymous]
     [HttpGet]
-    public async Task<IEnumerable<AppUser>> GetUsers()
+    public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
     {
-        var users = await _context.Users.ToListAsync();
+        var users = await _userRepository.GetMembersAsync();
 
-        return users;
+        return Ok(users);
     }
 
-    [AllowAnonymous]
-    [HttpGet("search")]
+    [HttpGet("{username}")] // /api/users/2
 
-    public async Task<IEnumerable<AppUser>> SearchUser(string userName)
+    public async Task<ActionResult<MemberDto>> GetUser(string username)
     {
-        IEnumerable<AppUser> users = await _context.Users.ToListAsync();
-
-        if (!string.IsNullOrEmpty(userName))
-        {
-            users = users.Where(u => u.UserName.Contains(userName));
-        }
-
-        return users;
-    }
-
-
-    [HttpGet("{id}")] // /api/users/2
-
-    public async Task<AppUser> GetUser(int id)
-    {
-        var user = await _context.Users.FindAsync(id);
-
-        return user;
+        return await _userRepository.GetMemberAsync(username);
     }
 }
