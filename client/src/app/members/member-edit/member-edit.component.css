@@ -13,13 +13,10 @@
     border-top: none;
 }
 
-
-
 @media all and (max-width: 992px)
 {
     .action-button {
         display: flex;
-        width: 30%;
         font-size: 75%;
         justify-content: center;
     }

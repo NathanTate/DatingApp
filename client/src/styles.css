@@ -50,5 +50,7 @@
 
   .gallery {
     height: 600px;
+    border-radius: 20px;
+    background-color: rgb(0 0 0 / 0.5);
   }
   

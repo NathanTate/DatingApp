@@ -1,0 +1,6 @@
+@media all and (max-width: 990px) {
+    .btn {
+        display: flex;
+        margin: 10px auto;
+    }
+}
