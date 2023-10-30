@@ -1,0 +1,68 @@
+.nv-file-over {
+    border: dotted 3px red;
+}
+
+input[type=file] {
+    color: transparent;
+}
+
+input[type=file]::file-selector-button {
+    color: #fff;
+    font-style: italic;
+    background-color: rgb(0 0 0 /0.3);
+    border-radius: 10%;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+input[type=file]::file-selector-button:hover {
+    color: #fff;
+    background-color: #FC46AA;
+    opacity: 0.9;
+    border-radius: 10%;
+    transition: background-color 0.3s;
+}
+
+input[type=file]::file-selector-button:active {
+    color: #fff;
+    background-color: #FC46AA;
+    opacity: 0.8;
+    border-radius: 10%;
+}
+
+.drop-text {
+    display: flex;
+    justify-content: center;
+}
+
+.fa-upload {
+    display: flex;
+    justify-content: center;
+}
+
+@media all and (max-width: 1200px)
+{
+    .set-main-btn {
+        display: flex;
+        height: 70%;
+        font-size: 70%;
+        justify-content: center;
+    }
+
+    .trash-btn {
+        display: flex;
+        height: 50%;
+        justify-content: center;
+    }
+
+    .photo-main-div {
+        display: inline-flex;
+    }
+}
+
+@media all and (max-width: 992px)
+{
+    .photo-main-div {
+        display: block;
+    }
+}

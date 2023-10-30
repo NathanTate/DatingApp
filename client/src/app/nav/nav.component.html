@@ -19,8 +19,8 @@
     </ul>
 
     <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
-      <img src="favicon.ico" alt="profile image" class="dropdown-image" />
-      <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle
+      <img src="{{user.photoUrl || './assets/user.png'}}" alt="profile image" class="dropdown-image" />
+      <a class="dropdown-toggle text-light text-decoration-none ms-1" dropdownToggle
         >Welcome {{user.username | titlecase}}</a
       >
       <div class="dropdown-menu" *dropdownMenu>
