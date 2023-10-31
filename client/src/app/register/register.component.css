@@ -1,6 +1,28 @@
-@media all and (max-width: 990px) {
-    .btn {
-        display: flex;
+@media all and (max-width: 992px) {
+    .btn-div {
+        display: inline-flex;
         margin: 10px auto;
     }
+
+    .btn {
+        font-size: 70%;
+        height: 50%;
+        width: 50%;
+    }
+}
+
+.password-div {
+    position: relative;
+}
+
+.eyeicon {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.form-control.is-valid,
+.form-control.is-invalid {
+    background-image: none;
 }
