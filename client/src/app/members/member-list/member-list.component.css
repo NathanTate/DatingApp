@@ -2,5 +2,22 @@
     .col-2{
         min-width: 25%;
     }
+    .pagination-btn {
+        font-size: small;
+    }
 
+    .order-btn {
+        font-size: small;
+        margin-top: 5px;
+        margin-left: 6px;
+    }
+
+}
+
+.pagination-btn ,.select-gender,.form-control{
+    padding: 8px;
+}
+
+.order-btn {
+    padding: 10px;
 }
