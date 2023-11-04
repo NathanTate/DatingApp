@@ -1,0 +1,5 @@
+@media all and (max-width: 991px) {
+    .col-2{
+        min-width: 25%;
+    }
+}
