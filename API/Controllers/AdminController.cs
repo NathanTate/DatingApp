@@ -62,6 +62,5 @@ public class AdminController : BaseApiController
     public async Task<ActionResult> GetPhotosForModeration()
     {
         return Ok("Admins or moderators can see this");
-        await Task.CompletedTask;
     }
 }
