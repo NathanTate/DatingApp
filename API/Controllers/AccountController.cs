@@ -18,8 +18,11 @@ public class AccountController : BaseApiController
     private readonly ITokenService _tokenService;
     private readonly IMapper _mapper;
 
-    public AccountController(UserManager<AppUser> userManager, ITokenService tokenService, IMapper mapper)
+    public DataContext _context { get; }
+
+    public AccountController(DataContext context, UserManager<AppUser> userManager, ITokenService tokenService, IMapper mapper)
     {
+        _context = context;
         _userManager = userManager;
         _tokenService = tokenService;
         _mapper = mapper;
@@ -28,10 +31,9 @@ public class AccountController : BaseApiController
     [HttpPost("register")] //api/account/register
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
-        if(await UserExists (registerDto.Username)) return BadRequest("Username is taken");
-        
+        if (await UserExists(registerDto.Username)) return BadRequest("Username is taken");
+
         var user = _mapper.Map<AppUser>(registerDto);
-        
 
         user.UserName = registerDto.Username.ToLower();
 
@@ -56,21 +58,21 @@ public class AccountController : BaseApiController
 
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
-        if(loginDto.Username == null)
+        if (loginDto.Username == null)
         {
             return Unauthorized("Enter Username");
         }
 
         var user = await _userManager.Users
         .Include(p => p.Photos)
-        .SingleOrDefaultAsync(x => 
+        .SingleOrDefaultAsync(x =>
         x.UserName == loginDto.Username.ToLower());
 
-        if(user == null) return Unauthorized("Invalid username");
+        if (user == null) return Unauthorized("Invalid username");
 
         var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
 
-        if(!result) return Unauthorized("Invalid password");
+        if (!result) return Unauthorized("Invalid password");
 
         return new UserDto
         {
